@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Git - Usage and Best Practices</title>
+
+  <script src="components/webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="components/slide-deck/a-slide-deck.html">
+  <link rel="import" href="components/slide-deck/a-slide.html">
+  <link rel="import" href="components/slide-deck/code-block.html">
+
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body unresolved>
+
+  <a-slide-deck width="1200" height="720">
+
+    <a-slide>
+      <hgroup>
+        <h1>Git</h1>
+        <h1>Usage & Best Practices</h1>
+      </hgroup>
+      <p class="small">
+        <a href="mailto:thomas.duerr@arvato.com">thomas.duerr@arvato.com</a>
+      </p>
+    </a-slide>
+
+    <a-slide>
+      <h1>SVN &rarr; Git</h1>
+    </a-slide>
+
+    <a-slide>
+      <h2>SVN &rarr; Git</h2>
+      <p>SVN Repositories sind zentral organisiert</p>
+      <p><img src="images/svn-architecture.png" /></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>SVN &rarr; Git</h2>
+      <p>Git Repositories sind <b>verteilt</b> organisiert</p>
+      <p><img src="images/git-architecture.png" /></p>
+      <p part><span style="position:absolute;top:220px;left:480px;"><code>.git</code> &nbsp; &nbsp; Remote "origin"</span><span style="position:absolute;top:500px;left:755px;"><code>.git</code> &nbsp; &nbsp; Local</span></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>SVN &rarr; Git</h2>
+      <p>Revisionsnummern sind nicht fortlaufend</p>
+      <pre>
+* d458b89 — updated readme with install instructions
+* 8101222 — added a README.md
+* 13a88cd — Initial Commit</pre>
+      <p>Revisionsnummern sind <code>SHA-1</code> Hashes</p>
+      <p>Revisionen können addressiert werden über <code>SHA-1</code>, <code>HEAD</code> (letzte Revision), <code>HEAD~1</code> (vorletzte Revision), <code>HEAD~2</code> etc.</p>
+    </a-slide>
+
+    <a-slide>
+      <h2>SVN &rarr; Git</h2>
+      <p><b>Branches</b> und <strong>Tags</strong> sind keine Verzeichnisse sondern Zeiger auf einen <b>Commit</b></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>SVN &rarr; Git</h2>
+      <p>Die <b>Git Historie</b> kann verändert werden</p>
+    </a-slide>
+
+    <a-slide>
+      <h1>Git Aktionen</h1>
+    </a-slide>
+
+    <a-slide>
+      <h2>Neues Repository erstellen</h2>
+      <p>Neues Local-Repository <code>git init</code></p>
+      <p>Remote-Repository hinzufügen <code>git remote add origin http://host.com/repository.git</code></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Ein existierendes Repository auschecken</h2>
+      <p>Klonen eines Remote-Repository mit <code>git clone http://host.com/path/to/repository.git</code> erzeugt ein Local-Repository</p>
+      <p>Local-Repository besteht aus <b>Working-Copy</b>, <b>Index</b> und <b>HEAD</b></p>
+    </a-slide>
+
+    <a-slide>
+      <img src="images/local-remote.png" />
+    </a-slide>
+
+    <a-slide>
+      <h2>add & commit</h2>
+      <p>Änderung vorschlagen (<q>zum Index hinzufügen</q> oder <q>stagen</q>):</p>
+      <p><code>git add &lt;dateiname&gt;</code></p>
+      <p><code>git add .</code></p>
+      <p>Änderung bestätigen (<q>zum HEAD hinzufügen</q>):</p>
+      <p><code>git commit -m "commit message"</code></p>
+      <p><a href="http://onlywei.github.io/explain-git-with-d3/#commit" target="_blank">Demo &#x279C;</a></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>branching</h2>
+      <p>Der <code>master</code> Branch ist der default Branch.</p>
+      <p>Einen neuen Branch erzeugen <code>git branch &lt;branch&gt;</code></p>
+      <p>In diesen Branch wechseln <code>git checkout &lt;branch&gt;</code></p>
+      <p>Alle Branches auflisten <code>git branch -a</code></p>
+      <p>Ein Branch ist nach dem hochladen <code>git push origin &lt;branch&gt;</code> für andere verfügbar</p>
+      <p><a href="http://onlywei.github.io/explain-git-with-d3/#branch" target="_blank">Demo &#x279C;</a></p>
+      <p></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>merge</h2>
+      <p>Der aktuelle Branch wird mit <code>git merge &lt;branch&gt;</code> mit dem Branch <code>&lt;branch&gt;</code> zusammengeführt</p>
+      <p>Gab es im aktuellen Branch Änderungen, wird ein <b>Merge Commit</b> mit zwei <b>Parent</b> Commits erzeugt</p>
+      <p>Gibt es im aktuellen Branch keine Änderungen wird ein <b>Fast Forward Merge</b> durchgeführt.</p>
+      <p><a href="http://onlywei.github.io/explain-git-with-d3/#merge" target="_blank">Demo &#x279C;</a></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>push to remote</h2>
+      <p>Mit <code>git push origin &lt;branch&gt;</code> werden Änderungen aus einem Branch an das Remote-Repository gesendet</p>
+      <p>Befinden sich bereits Änderungen auf dem Remote, muss vor dem <code>git push</code> zuerst ein <code>git pull</code> durchgeführt werden</p>
+      <p><a href="http://onlywei.github.io/explain-git-with-d3/#push" target="_blank">Demo &#x279C;</a></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>update from remote</h2>
+      <p>Um das lokale Repository mit den neusten Änderungen zu aktualisieren, werde diese zuerst mit <code>git fetch</code> in den <b>Remote Tracking Branch</b> heruntergeladen und dann mit <code>git merge</code> zusammengerführt</p>
+      <p>Der Befehl <code>git pull</code> führt beides gleichzeitig aus</p>
+      <p><a href="http://onlywei.github.io/explain-git-with-d3/#fetch" target="_blank">Demo &#x279C;</a></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>tagging</h2>
+      <p>Jeder Commit kann mit einem Tag markiert werden</p>
+      <p><code>git tag 1.0.0</code></p>
+      <p><code>git tag 1.0.0 &lt;ref&gt;</code></p>
+      <p><a href="http://onlywei.github.io/explain-git-with-d3/#tag" target="_blank">Demo &#x279C;</a></p>
+    </a-slide>
+
+    <a-slide>
+      <h1>Best Practices</h1>
+    </a-slide>
+
+    <a-slide>
+      <h2>Änderungen rückgängig machen</h2>
+      <p>Hinweise liefert immer <code>git status</code></p>
+      <p><code>git checkout &lt;file&gt;</code> Änderung in Working Copy zurücknehmen</p>
+      <p><code>git reset HEAD &lt;file&gt;</code> Änderung im Index zurücknehmen</p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Änderungen rückgängig machen</h2>
+      <p><code>git reset &lt;ref&gt;</code> Änderung in Repository entfernen <a href="http://onlywei.github.io/explain-git-with-d3/#reset" target="_blank">Demo &#x279C;</a></p>
+      <p><code>git revert &lt;ref&gt;</code> Änderung in Repository rückgängig hinzufügen <a href="http://onlywei.github.io/explain-git-with-d3/#revert" target="_blank">Demo &#x279C;</a></p>
+      <p><code>git revert -m 1 &lt;ref&gt;</code> Wird ein Merge-Commit rückgängig gemacht, muss mit <code>-m</code> der Eltern Zweig angegeben werden, welcher <b>beibehalten</b> werden soll (kann mit <code>git show &lt;ref&gt;</code> ermittelt werden)</p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Commit Historie verändern</h2>
+      <p>Veränderungen an der Historie sollten nur an Lokalen Commits vorgenommen werden</p>
+      <p><code>git commit --amend</code> korrigiert den <b>letzten</b> Commit</p>
+      <p><code>git rebase -i &lt;ref&gt;</code> fasst mehrere Commits zusammen ("squashing") oder verändert/löscht mehrere letzte Commits</p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Selektives Hinzufügen zum Index</h2>
+      <p><code>git add -p</code> ermöglicht das Übernehmen einzelner <b>Hunks</b> in den <b>Index</b></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Änderungen selektiv übernehmen</h2>
+      <p><code>git cherry-pick &lt;ref&gt;</code> überführt einzelne Commits aus einem Branch in den aktuellen Branch</p>
+      <p>Eine übersichtliche Commit Historie ist hierbei von Vorteil</p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Änderungen temporär verstecken</h2>
+      <p><code>git stash</code> Änderungen in Working Copy auf Stapel legen</p>
+      <p><code>git stash pop</code> Änderung vom Stapel wieder anwenden</p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Merge-Konflikte auflösen</h2>
+      <ul>
+        <li>Edit files and remove Conflict-Markers</li>
+        <li><code>git add</code></li>
+        <li><code>git commit -m "resolved merge conflict"</code></li>
+      </ul>
+    </a-slide>
+
+    <a-slide>
+      <h2>Suchen in der Historie</h2>
+      <p><code>git log --oneline --decorate --graph --stat</code></p>
+      <p><code>git log &lt;tag&gt; -5</code></p>
+      <p><code>git log --author "name"</code></p>
+      <p><code>git log -p &lt;datei&gt;</code> Alle Änderungen in einer Datei</p>
+      <p><code>git log -S &lt;pattern&gt;</code></p>
+      <p><code>git shortlog</code></p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Commit Message</h2>
+      <p>Die Commit Message hat einen Head und einen Body getrennt durch eine Leerzeile</p>
+      <p><code>git log  --oneline</code> zeigt nur den Head an, macht also die Historie übersichtlicher.</p>
+    </a-slide>
+
+    <a-slide>
+      <h2>Branching Workflow</h2>
+      <p>Use <code>git flow</code></p>
+      <p><a href="https://confluence.arvato-cp.com/display/TEDE/Git+Branching+Model+-+Gitflow" target="_blank">Dokumentation &#x279C;</a></p>
+    </a-slide>
+
+  </a-slide-deck>
+
+</body>
+</html>

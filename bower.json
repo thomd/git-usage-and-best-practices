@@ -1,0 +1,7 @@
+{
+  "name": "git usage and best practices",
+  "private": true,
+  "dependencies": {
+    "slide-deck": "philipwalton/slide-deck#0.3.0"
+  }
+}
