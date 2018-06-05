@@ -4,6 +4,7 @@
 
 To install the dependencies and view the slides, run the following commands:
 
+    npm install -g bower
     bower install
     python -m SimpleHTTPServer
 
